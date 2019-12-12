@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateFoodsAllergens extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('foods_allergens', function (Blueprint $table) {
             $table->bigIncrements('id');
+           $table->bigInteger('food_id')->unsigned();
             $table->bigInteger('allergen_id')->unsigned();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('avatar');
-            // // $table->foreign('allergen_id')->references('id')->on('allergens');
             $table->timestamps();
+            $table->foreign('allergen_id')->references('id')->on('allergens');
+            $table->foreign('food_id')->references('id')->on('foods');
+
         });
     }
 
@@ -34,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('foods_allergens');
     }
 }
