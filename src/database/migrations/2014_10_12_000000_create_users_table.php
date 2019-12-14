@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('avatar');
-            // // $table->foreign('allergen_id')->references('id')->on('allergens');
+            $table->string('address');
+           // $table->foreign('allergen_id')->references('id')->on('allergens');
             $table->timestamps();
         });
     }

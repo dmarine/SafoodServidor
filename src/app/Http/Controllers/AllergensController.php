@@ -24,7 +24,7 @@ class AllergensController extends Controller {
     public function store(Allergens $allergens) {
         $request->validate([
             'id' => 'required',
-            'Nombre' => 'required',
+            'name' => 'required',
         ]);
         $allergens = Allergens::create($request->all());
         return response()->json($allergens);

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Allergen extends Model {
     public $timestamps = false;
 
-    protected $table = 'alergenos';
+    protected $table = 'allergens';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id', 'Nombre', 'Descripcion'
+        'id', 'name'
     ];
 }

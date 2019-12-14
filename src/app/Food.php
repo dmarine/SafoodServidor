@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model {
     public $timestamps = false;
 
-    protected $table = 'comidas';
+    protected $table = 'foods';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id', 'Nombre', 'Descripcion', 'Imagen', 'idCategoria'
+        'id', 'name', 'description', 'image', 'category_id','allergen_id','restaurant_id'
     ];
 }

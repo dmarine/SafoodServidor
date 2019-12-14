@@ -21,6 +21,8 @@ class CreateFoods extends Migration
             $table->bigInteger('allergen_id')->unsigned();
             $table->bigInteger('restaurant_id')->unsigned();
             $table->string('image');
+            $table->string('description');
+
             $table->timestamps();
             $table->foreign('allergen_id')->references('id')->on('allergens');
             $table->foreign('category_id')->references('id')->on('categories');
