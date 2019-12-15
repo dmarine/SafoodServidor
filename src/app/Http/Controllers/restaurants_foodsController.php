@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\carrouselImage;
+use App\model\restaurants_foods;
 use Illuminate\Http\Request;
 
-class CarrouselImageController extends Controller
+class restaurants_foodsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CarrouselImageController extends Controller
      */
     public function index()
     {
-        return response()->json(carrousel_images::all());
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class CarrouselImageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\carrouselImage  $carrouselImage
+     * @param  \App\restaurants_foods  $restaurants_foods
      * @return \Illuminate\Http\Response
      */
-    public function show(carrouselImage $carrouselImage)
+    public function show(restaurants_foods $restaurants_foods)
     {
         //
     }
@@ -52,10 +52,10 @@ class CarrouselImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\carrouselImage  $carrouselImage
+     * @param  \App\restaurants_foods  $restaurants_foods
      * @return \Illuminate\Http\Response
      */
-    public function edit(carrouselImage $carrouselImage)
+    public function edit(restaurants_foods $restaurants_foods)
     {
         //
     }
@@ -64,10 +64,10 @@ class CarrouselImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\carrouselImage  $carrouselImage
+     * @param  \App\restaurants_foods  $restaurants_foods
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, carrouselImage $carrouselImage)
+    public function update(Request $request, restaurants_foods $restaurants_foods)
     {
         //
     }
@@ -75,10 +75,10 @@ class CarrouselImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\carrouselImage  $carrouselImage
+     * @param  \App\restaurants_foods  $restaurants_foods
      * @return \Illuminate\Http\Response
      */
-    public function destroy(carrouselImage $carrouselImage)
+    public function destroy(restaurants_foods $restaurants_foods)
     {
         //
     }

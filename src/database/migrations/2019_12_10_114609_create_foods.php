@@ -14,17 +14,16 @@ class CreateFoods extends Migration
     public function up()
     {
         Schema::create('foods', function (Blueprint $table) {
-            $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('allergen_id')->unsigned();
+           // $table->bigInteger('allergen_id')->unsigned();
             $table->bigInteger('restaurant_id')->unsigned();
             $table->string('image');
             $table->string('description');
-
+            $table->float('precio');
             $table->timestamps();
-            $table->foreign('allergen_id')->references('id')->on('allergens');
+          //  $table->foreign('allergen_id')->references('id')->on('allergens');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
         });

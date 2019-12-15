@@ -11,8 +11,21 @@ class allergensSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('allergens')->insert([
-        //     ['name' => ''],
-        //     ]);
+         DB::table('allergens')->insert([
+             ['name' => 'gluten'],
+             ['name' => 'altramuces'],
+             ['name' => 'moluscos'],
+             ['name' => 'sulfitos'],
+             ['name' => 'sesamo'],
+             ['name' => 'mostaza'],
+             ['name' => 'apio'],
+             ['name' => 'frutos de cascara'],
+             ['name' => 'leche y lactosa'],
+             ['name' => 'soja'],
+             ['name' => 'cacahuetes'],
+             ['name' => 'pescado'],
+             ['name' => 'huevos'],
+             ['name' => 'crustaceos'],
+             ]);
     }
 }

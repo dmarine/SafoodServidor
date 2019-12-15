@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Restaurant extends Model {
+class Category extends Model {
     public $timestamps = false;
 
-    protected $table = 'restaurants';
+    protected $table = 'categories';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id', 'name', 'description', 'image'
+        'id', 'name'
     ];
 }

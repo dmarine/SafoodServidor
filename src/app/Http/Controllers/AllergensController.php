@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Allergens as Allergens;
+use App\model\Allergen as Allergens;
 
 class AllergensController extends Controller {
     /**

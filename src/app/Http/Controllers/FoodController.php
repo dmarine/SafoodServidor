@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Food as Food;
+use App\model\Food as Food;
 
 class FoodController extends Controller {
     /**

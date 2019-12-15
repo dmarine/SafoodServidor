@@ -11,10 +11,15 @@ class restaurants_foodsSeeder extends Seeder
      */
     public function run()
     {
-       // DB::table('restaurants_foods')->insert([
-        //   [
-        //       'restaurant_id'=>'';
-        //       'food_id'=>'']
-        //   ]);
+        $values =array(
+            array('restaurant_id'=>'1',
+                  'food_id'=>'1'),
+            array('restaurant_id'=>'1',
+                  'food_id'=>'2')
+        );
+        foreach($values as $value){
+        DB::table('restaurants_foods')->insert([$value
+               ]);
+        }
     }
 }

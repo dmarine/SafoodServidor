@@ -1,11 +1,12 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class carrousel_image extends Model
+class carousel extends Model
 {
+    protected $table="carousels";
     protected $primaryKey = 'id';
     protected $fillable = [
         'id', 'image'

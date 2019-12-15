@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class carrouselImagesSeeder extends Seeder
+class carouselsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class carrouselImagesSeeder extends Seeder
      */
     public function run()
     {
-          DB::table('carrouselImages')->insert([
+          DB::table('carousels')->insert([
              ['name' => 'images/1.jpg'],
              ['name' => 'images/2.jpg'],
              ['name' => 'images/3.jpg',],

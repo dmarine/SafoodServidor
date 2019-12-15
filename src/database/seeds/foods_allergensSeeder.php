@@ -10,11 +10,87 @@ class foods_allergensSeeder extends Seeder
      * @return void
      */
     public function run()
-    { // DB::table('foods_allergens')->insert([
-        //   [
-        //       'food_id'=>'';
-        //       'allergen_id'=>'']
-        //   ]);
-
+    {
+        $values =array(
+            array(
+                  'food_id'=>'1',
+                  'allergen_id'=>'12'
+                ),
+            array(
+                  'food_id'=>'2',
+                  'allergen_id'=>'13',
+            ),
+            array(
+                'food_id'=>'2',
+                'allergen_id'=>'1'
+            ),
+            array(
+                'food_id'=>'2',
+                'allergen_id'=>'9'
+            ),
+            array(
+                'food_id'=>'3',
+                'allergen_id'=>'1'
+            ),
+            array(
+                'food_id'=>'3',
+                'allergen_id'=>'9'
+            ),
+            array(
+                'food_id'=>'3',
+                'allergen_id'=>'12'
+            ),
+            array(
+                'food_id'=>'3',
+                'allergen_id'=>'13'
+            ),
+            array(
+                'food_id'=>'3',
+                'allergen_id'=>'11'
+            ),
+            array(
+                'food_id'=>'4',
+                'allergen_id'=>'1'
+            ),
+            array(
+                'food_id'=>'4',
+                'allergen_id'=>'9'
+            ),
+            array(
+                'food_id'=>'4',
+                'allergen_id'=>'10'
+            ),
+            array(
+                'food_id'=>'4',
+                'allergen_id'=>'5'
+            ),
+            array(
+                'food_id'=>'5',
+                'allergen_id'=>'1'
+            ),
+            array(
+                'food_id'=>'5',
+                'allergen_id'=>'5'
+            ),
+            array(
+                'food_id'=>'5',
+                'allergen_id'=>'6'
+            ),
+            array(
+                'food_id'=>'5',
+                'allergen_id'=>'9'
+            ),
+            array(
+                'food_id'=>'5',
+                'allergen_id'=>'12'
+            ),
+            array(
+                'food_id'=>'5',
+                'allergen_id'=>'13'
+            ),
+        );
+        foreach($values as $value){
+        DB::table('foods_allergens')->insert([$value]);
+        }
     }
 }

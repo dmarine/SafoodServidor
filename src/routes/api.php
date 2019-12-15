@@ -17,7 +17,7 @@ Route::resource('restaurants', 'RestaurantController');
 Route::resource('food', 'FoodController');
 Route::resource('category', 'CategoryController');
 Route::resource('allergens', 'AllergensController');
-Route::resource('carrousel_image', 'CarrouselImageController');
+Route::resource('carousel', 'carouselController');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

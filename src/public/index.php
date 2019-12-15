@@ -50,6 +50,19 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 */
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+/*
+|--------------------------------------------------------------------------
+| Habilitar el CORS
+|--------------------------------------------------------------------------
+|
+| Permite a los clientes interactuar con la API fuera del dominio
+| Este es un metodo primitivo, hay que hacer un middleware y crear
+| las rutas apropiadas para ello.
+|
+*/
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+
 
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()

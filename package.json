@@ -11,7 +11,8 @@
         "build": "sh scripts/build.sh",
         "deploy": "npm run build && sh scripts/deploy.sh",
         "serve": "onchange src/index.html -- npm run deploy",
-        "json": "json-server --watch src/biblioteca-original.json"
+        "json": "json-server --watch src/biblioteca-original.json",
+        "BaseDatos": "sh scripts/crearBD.sh"
     },
     "repository": {
         "type": "git",

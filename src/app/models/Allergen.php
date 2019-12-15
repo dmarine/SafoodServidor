@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model {
+class Allergen extends Model {
     public $timestamps = false;
 
-    protected $table = 'categories';
+    protected $table = 'allergens';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id', 'name'

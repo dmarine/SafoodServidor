@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Food extends Model {
     protected $table = 'foods';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id', 'name', 'description', 'image', 'category_id','allergen_id','restaurant_id'
+        'id', 'name', 'description', 'image', 'category_id','restaurant_id'
     ];
 }

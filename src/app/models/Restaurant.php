@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Allergen extends Model {
+class Restaurant extends Model {
     public $timestamps = false;
 
-    protected $table = 'allergens';
+    protected $table = 'restaurants';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id', 'name'
+        'id', 'name', 'description', 'image'
     ];
 }
