@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\model\Restaurant as Restaurant;
+use App\models\Restaurant as Restaurant;
 
 class RestaurantController extends Controller {
     /**

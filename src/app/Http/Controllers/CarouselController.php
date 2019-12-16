@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\model\carousel as carousel;
+use App\models\carousel as carousel;
 use Illuminate\Http\Request;
 
 class carouselController extends Controller

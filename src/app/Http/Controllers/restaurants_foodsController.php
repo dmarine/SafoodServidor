@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\model\restaurants_foods;
+use App\models\restaurants_foods;
 use Illuminate\Http\Request;
 
 class restaurants_foodsController extends Controller
