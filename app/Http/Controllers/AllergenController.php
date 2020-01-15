@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Allergen as Allergens;
+use App\Models\Allergen as Allergen;
 
-class AllergensController extends Controller {
+class AllergenController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return response()->json(Allergens::all());
+        return response()->json(Allergen::all());
     }
 
     /**
@@ -21,13 +21,13 @@ class AllergensController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Allergens $allergens) {
+    public function store(Allergen $allergen) {
         $request->validate([
             'id' => 'required',
             'name' => 'required',
         ]);
-        $allergens = Allergens::create($request->all());
-        return response()->json($allergens);
+        $allergen = Allergen::create($request->all());
+        return response()->json($allergen);
     }
 
     /**
@@ -36,8 +36,8 @@ class AllergensController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Allergens $allergens) {
-        return response()->json($allergens);
+    public function show(Allergen $allergen) {
+        return response()->json($allergen);
     }
 
     /**
@@ -47,9 +47,9 @@ class AllergensController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Allergens $allergens) {
-        $allergens->update($request->all());
-        return response()->json($allergens);
+    public function update(Request $request, Allergen $allergen) {
+        $allergen->update($request->all());
+        return response()->json($allergen);
     }
 
     /**
@@ -58,7 +58,7 @@ class AllergensController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Allergens $allergens) {
-        Allergens::destroy($allergens->id);
+    public function destroy(Allergen $allergen) {
+        Allergen::destroy($allergen->id);
     }
 }

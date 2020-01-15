@@ -16,11 +16,18 @@ use Illuminate\Http\Request;
 Route::resources([
     'restaurants' => 'RestaurantController',
     'foods' => 'FoodController',
-    'categorys' => 'CategoryController',
-    'allergens' => 'AllergensController',
+    'categories' => 'CategoryController',
+    'allergens' => 'AllergenController',
     'carousel' => 'CarouselController',
 ]);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('categories/{idCategory}/foods','FoodController@findByCategory');
+Route::get('allergens/{idAllergens}/foods','FoodController@findByAllergen');
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function() {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 });
