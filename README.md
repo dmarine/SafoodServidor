@@ -13,6 +13,17 @@ npm run init
 npm run db
 ```
 
+## Peticiones
+| Method       | Uri                            |
+| ------------ | ------------------------------ |
+| GET          | /foods                         |
+| GET          | /foods/{id}                    |
+| POST         | /foods                         |
+| PUT/PATCH    | /foods/{id}                    |
+| DELETE       | /foods/{id}                    |
+| GET          | /categorys/{id}/foods          |
+| GET          | /allergens/{id}/foods          |
+
 ## Pendiente
 - NULL
 
