@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Food as Food;
 use App\Models\Category as Category;
+use App\Models\Allergen as Allergen;
 use Illuminate\Support\Facades\DB;
 
 class FoodController extends Controller {
@@ -63,10 +64,37 @@ class FoodController extends Controller {
         $foods_allergens = DB::table('foods_allergens')->where('allergen_id', $idAllergen)->get();
 
         foreach ($foods_allergens as $food) {
-            $foods []= Food::find($food->id);
+            $foods []= Food::find($food->food_id);
         }
         
         return response()->json($foods);
+    }
+
+    /**
+     * Display the specified resource by category.
+     *
+     * @param  int  $idCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function allergens(int $idFood) {
+        $allergens = [];
+        $foods_allergens = DB::table('foods_allergens')->where('food_id', $idFood)->get();
+
+        foreach ($foods_allergens as $allergen) {
+            $allergens []= Allergen::find($allergen->allergen_id);
+        }
+        
+        return response()->json($allergens);
+    }
+
+    /**
+     * Display the specified resource random.
+     *
+     * @param  int  $idCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function random() {
+        return response()->json(Food::all()->random(1)[0]);
     }
 
     /**

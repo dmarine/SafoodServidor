@@ -17,7 +17,7 @@ class CreateRestaurants extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('image')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
         });
     }
 

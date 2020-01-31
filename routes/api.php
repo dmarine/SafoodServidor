@@ -22,7 +22,9 @@ Route::resources([
 ]);
 
 Route::get('categories/{idCategory}/foods','FoodController@findByCategory');
-Route::get('allergens/{idAllergens}/foods','FoodController@findByAllergen');
+Route::get('allergens/{idAllergen}/foods','FoodController@findByAllergen');
+Route::get('foods/{idFood}/allergens','FoodController@allergens');
+Route::get('food/random','FoodController@random');
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function() {
     Route::post('register', 'AuthController@register');
@@ -30,4 +32,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function() {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::put('update','AuthController@update');
+    
+    Route::post('allergens','AuthController@allergens');
+    Route::delete('orders', 'OrderController@destroy');
+    Route::resources([
+        'cart' => 'CartController',
+        'orders' => 'OrderController',
+    ]);
 });

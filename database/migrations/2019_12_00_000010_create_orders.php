@@ -15,10 +15,9 @@ class CreateOrders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('cart_id')->unsigned();
             $table->bigInteger('food_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('food_id')->references('id')->on('foods');
+            $table->bigInteger('quantity')->unsigned()->default(1);
         });
     }
 
