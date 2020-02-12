@@ -15,10 +15,8 @@ class CreateFoodsAllergens extends Migration
     {
         Schema::create('foods_allergens', function (Blueprint $table) {
             $table->bigIncrements('id');
-           $table->bigInteger('food_id')->unsigned();
+            $table->bigInteger('food_id')->unsigned();
             $table->bigInteger('allergen_id')->unsigned();
-            $table->foreign('allergen_id')->references('id')->on('allergens');
-            $table->foreign('food_id')->references('id')->on('foods');
         });
     }
 

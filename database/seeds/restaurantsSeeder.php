@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class restaurantsSeeder extends Seeder
 {
@@ -20,6 +21,6 @@ class restaurantsSeeder extends Seeder
             ['name'=>'Sushi Ohayo'],
             ['name'=>'The Salad Time'],
             ['name'=>'100 Montaditos']
-            ]);
+        ]);
     }
 }

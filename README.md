@@ -14,15 +14,15 @@ npm run db
 ```
 
 ## Peticiones
-| Method       | Uri                            |
-| ------------ | ------------------------------ |
-| GET          | /foods                         |
-| GET          | /foods/{id}                    |
-| POST         | /foods                         |
-| PUT/PATCH    | /foods/{id}                    |
-| DELETE       | /foods/{id}                    |
-| GET          | /categorys/{id}/foods          |
-| GET          | /allergens/{id}/foods          |
+| Method       | Uri                             |
+| ------------ | ------------------------------- |
+| GET          | /foods                          |
+| GET          | /foods/{id}                     |
+| POST         | /foods                          |
+| PUT/PATCH    | /foods/{id}                     |
+| DELETE       | /foods/{id}                     |
+| GET          | /categories/{id}/foods          |
+| GET          | /allergens/{id}/foods           |
 
 ## Pendiente
 - NULL
@@ -38,6 +38,11 @@ npm run db
 ## Documentacion para el desarrollo
 - [Inserción de datos con los seeders de Laravel](https://styde.net/insercion-de-datos-con-los-seeders-de-laravel)
 - [Fix TableSeeder don’t exist "php artisan migrate –seed"](https://www.blenderdeluxe.com/fix-tableseeder-dont-exist-php-artisan-migrate-seed-laravel-5)
+
+### Comando interesante
+```
+composer dump-autoload
+```
 
 ### Trabajar con foreing keys
 Editar el archivo /config/database.php | Array: connections -> mysql -> engine

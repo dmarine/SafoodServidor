@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class allergensSeeder extends Seeder
 {
@@ -11,21 +12,21 @@ class allergensSeeder extends Seeder
      */
     public function run()
     {
-         DB::table('allergens')->insert([
-             ['name' => 'gluten'],
-             ['name' => 'altramuces'],
-             ['name' => 'moluscos'],
-             ['name' => 'sulfitos'],
-             ['name' => 'sesamo'],
-             ['name' => 'mostaza'],
-             ['name' => 'apio'],
-             ['name' => 'frutos de cascara'],
-             ['name' => 'leche y lactosa'],
-             ['name' => 'soja'],
-             ['name' => 'cacahuetes'],
-             ['name' => 'pescado'],
-             ['name' => 'huevos'],
-             ['name' => 'crustaceos'],
-             ]);
+        DB::table('allergens')->insert([
+            ['name' => 'Gluten'],
+            ['name' => 'Altramuces'],
+            ['name' => 'Moluscos'],
+            ['name' => 'Sulfitos'],
+            ['name' => 'Sesamo'],
+            ['name' => 'Mostaza'],
+            ['name' => 'Apio'],
+            ['name' => 'Frutos de cascara'],
+            ['name' => 'Lactosa'],
+            ['name' => 'Soja'],
+            ['name' => 'Cacahuetes'],
+            ['name' => 'Pescado'],
+            ['name' => 'Huevos'],
+            ['name' => 'Crustaceos'],
+        ]);
     }
 }

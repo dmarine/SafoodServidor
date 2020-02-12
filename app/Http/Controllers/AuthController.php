@@ -6,17 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Allergen;
+use App\Models\Cart;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
     /**
      * Create a new AuthController instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
@@ -25,8 +26,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
-    {
+    public function login() {
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
@@ -37,14 +37,13 @@ class AuthController extends Controller
     }
 
     /**
-     * Register
+     * Register user.
      *
      * @param Request $request
      * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request) 
-    {
+    public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
@@ -61,9 +60,45 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        $cart = Cart::create([
+            'user_id' => $user->id,
+            'date' => new \DateTime(),
+        ]);
+
         $token = auth()->login($user);
-        
         return $this->respondWithToken($token);
+    }
+
+    /**
+     * Update user.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json(['error' => 'Not updated'], 400);
+        }
+        
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->address = ($request->address) ? $request->address : $user->address;
+        $user->password = ($request->password) ? bcrypt($request->password) : $user->password;
+        $user->save();
+
+        $allergens = $request->allergens;
+        $table = DB::table('users_allergens');
+        $table->where('user_id', '=', $user->id)->delete();
+        if($allergens) {
+            foreach ($allergens as $key => $value) {
+                $table->insert(['user_id' => $user->id, 'allergen_id' => $key]); 
+            }
+        }
+
+        return response()->json(['success' => 'User updated', 'user' => $user], 200);
     }
 
     /**
@@ -71,9 +106,40 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
-    {
+    public function me() {
         return response()->json(auth()->user());
+    }
+
+    /**
+     * Get allergens.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function allergens() {
+        $allergens = [];
+        $users_allergens = DB::table('users_allergens')->where('user_id', auth()->user()->id)->get();
+
+        foreach ($users_allergens as $allergen) {
+            $allergens []= Allergen::find($allergen->allergen_id);
+        }
+        
+        return response()->json($allergens);
+    }
+
+    /**
+     * Get last cart.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function lastCart() {
+        $allergens = [];
+        $users_allergens = Cart::where('user_id', auth()->user()->id)->get();
+
+        foreach ($users_allergens as $allergen) {
+            $allergens []= Allergen::find($allergen->allergen_id);
+        }
+        
+        return response()->json($allergens);
     }
 
     /**
@@ -81,8 +147,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
-    {
+    public function logout() {
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
@@ -93,8 +158,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function refresh()
-    {
+    public function refresh() {
         return $this->respondWithToken(auth()->refresh());
     }
 
@@ -105,8 +169,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
-    {
+    protected function respondWithToken($token) {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

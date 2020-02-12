@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class carouselSeeder extends Seeder
+class cartSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,10 +12,12 @@ class carouselSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('carousel')->insert([
-            ['name' => 'slider1.jpg'],
-            ['name' => 'slider2.jpg'],
-            ['name' => 'slider3.jpg',],
+
+        DB::table('cart')->insert([
+            [
+                'user_id' => 1,
+                'date' => new \DateTime()
+            ]
         ]);
     }
 }

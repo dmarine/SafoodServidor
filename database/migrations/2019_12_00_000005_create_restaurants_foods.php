@@ -17,8 +17,6 @@ class CreateRestaurantsFoods extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('restaurant_id')->unsigned();
             $table->bigInteger('food_id')->unsigned();
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
-            $table->foreign('food_id')->references('id')->on('foods');
         });
     }
 

@@ -19,10 +19,8 @@ class CreateFoods extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('restaurant_id')->unsigned();
             $table->string('image');
-            $table->string('description');
+            $table->text('description');
             $table->float('price');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
         });
     }
 
