@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Restaurant as Restaurant;
 
 class RestaurantController extends Controller {
+    /**
+     * Create a new RestaurantController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth.role', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +31,7 @@ class RestaurantController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Restaurant $restaurant) {
+    public function store(Request $request) {
         $request->validate([
             'id' => 'required',
             'Nombre' => 'required',
@@ -38,6 +48,15 @@ class RestaurantController extends Controller {
      */
     public function show(Restaurant $restaurant) {
         return response()->json($restaurant);
+    }
+
+    /**
+     * Count of all restaurants
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function countRestaurants(){
+        return response()->json(DB::table('restaurants')->count());
     }
 
     /**

@@ -7,6 +7,15 @@ use App\Models\Allergen as Allergen;
 
 class AllergenController extends Controller {
     /**
+     * Create a new AllergenController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth.role', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,9 +30,8 @@ class AllergenController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Allergen $allergen) {
+    public function store(Request $request) {
         $request->validate([
-            'id' => 'required',
             'name' => 'required',
         ]);
         $allergen = Allergen::create($request->all());
@@ -60,5 +68,6 @@ class AllergenController extends Controller {
      */
     public function destroy(Allergen $allergen) {
         Allergen::destroy($allergen->id);
+        return response()->json($allergen);
     }
 }

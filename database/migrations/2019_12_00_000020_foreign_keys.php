@@ -26,12 +26,6 @@ class ForeignKeys extends Migration
             $table->foreign('food_id')->references('id')->on('foods');
         });
         
-        Schema::table('restaurants_foods', function($table)
-        {
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
-            $table->foreign('food_id')->references('id')->on('foods');
-        });
-        
         Schema::table('users_allergens', function($table)
         {
             $table->foreign('user_id')->references('id')->on('users');

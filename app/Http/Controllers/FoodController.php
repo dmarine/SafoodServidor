@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Food as Food;
+use Illuminate\Support\Facades\DB;
 use App\Models\Category as Category;
 use App\Models\Allergen as Allergen;
-use Illuminate\Support\Facades\DB;
+use App\Models\Food as Food;
 
 class FoodController extends Controller {
+    /**
+     * Create a new FoodController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth.role', ['except' => ['index', 'show', 'findByCategory', 'findByAllergen', 'allergens', 'random']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,10 +33,9 @@ class FoodController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Food $food) {
+    public function store(Request $request) {
         $request->validate([
-            'id' => 'required',
-            'Nombre' => 'required',
+            'name' => 'required',
         ]);
         $food = Food::create($request->all());
         return response()->json($food);
@@ -116,6 +124,8 @@ class FoodController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Food $food) {
+        $foods_allergens = DB::table('foods_allergens')->where('food_id', $food->id)->delete();
         Food::destroy($food->id);
+        return response()->json($food);
     }
 }

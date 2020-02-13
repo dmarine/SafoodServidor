@@ -7,6 +7,15 @@ use App\Models\Carousel as Carousel;
 
 class CarouselController extends Controller {
     /**
+     * Create a new CarouselController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth.role', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,10 +30,9 @@ class CarouselController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Carousel $carousel) {
+    public function store(Request $request) {
         $request->validate([
-            'id' => 'required',
-            'name' => 'required',
+            'image' => 'required'
         ]);
         $carousel = Carousel::create($request->all());
         return response()->json($carousel);
@@ -60,5 +68,6 @@ class CarouselController extends Controller {
      */
     public function destroy(Carousel $carousel) {
         Carousel::destroy($carousel->id);
+        return response()->json($carousel);
     }
 }

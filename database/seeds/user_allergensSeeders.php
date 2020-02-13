@@ -21,14 +21,6 @@ class users_allergensSeeder extends Seeder
             [
                 'user_id' => 1,
                 'allergen_id' => 7
-            ],
-            [
-                'user_id' => 1,
-                'allergen_id' => 11
-            ],
-            [
-                'user_id' => 1,
-                'allergen_id' => 12
             ]
         ]);
     }
