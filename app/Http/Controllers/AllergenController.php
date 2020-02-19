@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Category as Category;
 use App\Models\Allergen as Allergen;
-use App\Models\Food as Food;
 
 class AllergenController extends Controller {
+    /**
+     * Create a new AllergenController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth.role', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +30,8 @@ class AllergenController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Allergen $allergen) {
+    public function store(Request $request) {
         $request->validate([
-            'id' => 'required',
             'name' => 'required',
         ]);
         $allergen = Allergen::create($request->all());
@@ -36,7 +41,7 @@ class AllergenController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Allergen $allergen) {
@@ -44,37 +49,10 @@ class AllergenController extends Controller {
     }
 
     /**
-     * Display the specified resource by category.
-     *
-     * @param  int  $idCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function findByCategory(int $idCategory) {
-        return response()->json(Food::where('category_id', $idCategory)->get());
-    }
-
-    /**
-     * Display the specified resource by allergen.
-     *
-     * @param  int  $idCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function findByAllergen(int $idAllergen) {
-        $foods = [];
-        $foods_allergens = DB::table('foods_allergens')->where('allergen_id', $idAllergen)->get();
-
-        foreach ($foods_allergens as $food) {
-            $foods []= Food::find($food->id);
-        }
-        
-        return response()->json($foods);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Allergen $allergen) {
@@ -85,10 +63,11 @@ class AllergenController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Food  $food
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Allergen $allergen) {
         Allergen::destroy($allergen->id);
+        return response()->json($allergen);
     }
 }

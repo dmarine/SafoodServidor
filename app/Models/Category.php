@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Food as Food;
 
 class Category extends Model {
     public $timestamps = false;
@@ -12,4 +13,8 @@ class Category extends Model {
     protected $fillable = [
         'id', 'name'
     ];
+
+    public function foods() {
+        return $this->hasMany(Food::class);
+    }
 }

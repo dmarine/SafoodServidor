@@ -15,12 +15,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('allergen_id')->unsigned();
+            $table->boolean('role')->default(false);
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
+            $table->timestamps();
         });
     }
 

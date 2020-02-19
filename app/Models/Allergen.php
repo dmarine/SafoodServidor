@@ -12,4 +12,8 @@ class Allergen extends Model {
     protected $fillable = [
         'id', 'name'
     ];
+
+    public function foods() {
+        return $this->belongsToMany(Allergen::class, 'foods_allergens', 'food_id', 'allergen_id');
+    }
 }

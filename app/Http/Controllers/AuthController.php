@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,7 @@ class AuthController extends Controller {
      */
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth.jwt', ['only' => ['countUsers', 'usersRegisteredMonth']]);
     }
 
     /**
@@ -102,6 +104,23 @@ class AuthController extends Controller {
     }
 
     /**
+     * Update user avatar.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateAvatar(Request $request) {
+        $path = $request->file("image")->storeAs(
+            'images/avatar', 'avatar-'.auth()->user()->id.'.png', 'public'
+        );
+
+        $user = auth()->user();
+        $user->avatar = 'avatar-'.auth()->user()->id.'.png';
+        $user->save();
+
+        return response()->json($path);
+    }
+
+    /**
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -140,6 +159,24 @@ class AuthController extends Controller {
         }
         
         return response()->json($allergens);
+    }
+
+    /**
+     * Count of all users
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function countUsers(){
+        return response()->json(DB::table('users')->count());
+    }
+
+    /**
+     * Count of all users by mounth
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function usersRegisteredMonth(){
+        return response()->json(DB::table('users')->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->count());
     }
 
     /**

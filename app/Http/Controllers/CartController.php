@@ -9,15 +9,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
-{
+class CartController extends Controller {
     /**
-     * Create a new AuthController instance.
+     * Create a new CartController instance.
      *
      * @return void
      */
     public function __construct() {
         $this->middleware('auth:api');
+        $this->middleware('auth.jwt', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -98,5 +98,6 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart) {
         Cart::destroy($cart->id);
+        return response()->json($cart);
     }
 }

@@ -18,6 +18,7 @@ class CreateOrders extends Migration
             $table->bigInteger('cart_id')->unsigned();
             $table->bigInteger('food_id')->unsigned();
             $table->bigInteger('quantity')->unsigned()->default(1);
+            $table->timestamps();
         });
     }
 

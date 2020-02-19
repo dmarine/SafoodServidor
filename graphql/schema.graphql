@@ -1,0 +1,58 @@
+type Carousel {
+    id: ID!
+    image: String!
+}
+
+type Category {
+    id: ID!
+    name: String!
+    foods: [Food!]! @hasMany
+}
+
+type Allergen {
+    id: ID!
+    name: String
+    foods: [Food!]! @hasMany
+}
+
+type Restaurant {
+    id: ID!
+    name: String!
+    description: String!
+    image: String!
+    foods: [Food!]! @hasMany
+}
+
+type Food {
+    id: ID!
+    name: String!
+    description: String!
+    image: String!
+    price: String!
+    restaurant: Restaurant! @belongsTo
+    category: Category! @belongsTo
+    allergens: [Allergen!]! @belongsToMany
+}
+
+type Query {
+    foods: [Food!]! @all
+    food(id: ID @eq): Food @find
+
+    categories: [Category!]! @all
+    category(id: ID @eq): Category @find
+
+    restaurants: [Restaurant!]! @all
+    restaurant(id: ID @eq): Restaurant @find
+
+    allergens: [Allergen!]! @all
+    allergen(id: ID @eq): Allergen @find
+
+    sliders: [Carousel!]! @all
+    slider(id: ID @eq): Carousel @find
+}
+
+type Mutation {
+    createCategory(name: String @rules(apply: ["required", "min:5"])): Category @create
+    updateCategory(id: ID! name: String): Category @update
+    deleteCategory(id: ID!): Category @delete
+}

@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Food as Food;
-use App\Models\Cart as Cart;
-use App\Models\Order as Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Order as Order;
+use App\Models\Food as Food;
+use App\Models\Cart as Cart;
 
 class OrderController extends Controller
 {
     /**
-     * Create a new AuthController instance.
+     * Create a new OrderController instance.
      *
      * @return void
      */
     public function __construct() {
         $this->middleware('auth:api');
+        $this->middleware('auth.role', ['only' => ['store', 'getOrdersFoodChart', 'update', 'destroy']]);
     }
 
     /**
@@ -86,6 +88,27 @@ class OrderController extends Controller
      */
     public function show(Order $order) {
         return response()->json($order);
+    }
+
+    /**
+     * Count of all orders
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function countOrders(){
+        return response()->json(DB::table('orders')->count());
+    }
+
+    /**
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOrdersFoodChart(){
+        return response()->json(DB::table('orders')->join('foods', 'foods.id', '=', 'orders.food_id')
+                                                   ->select('foods.name', DB::raw('SUM(quantity) AS CantidadTotal'))
+                                                   ->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])
+                                                   ->groupBy('orders.food_id')->get());
     }
 
     /**

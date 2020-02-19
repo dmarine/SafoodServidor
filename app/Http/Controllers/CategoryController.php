@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Category as Category;
 
 class CategoryController extends Controller {
+    /**
+     * Create a new CategoryController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth.role', ['except' => ['index', 'show']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +33,7 @@ class CategoryController extends Controller {
      */
     public function store(Request $request) {
         $request->validate([
-            'id' => 'required',
-            'Nombre' => 'required',
+            'name' => 'required',
         ]);
         $category = Category::create($request->all());
         return response()->json($category);
@@ -38,6 +47,15 @@ class CategoryController extends Controller {
      */
     public function show(Category $category) {
         return response()->json($category);
+    }
+
+    /**
+     * Count of all categories
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function countCategories(){
+        return response()->json(DB::table('categories')->count());
     }
 
     /**
@@ -60,5 +78,6 @@ class CategoryController extends Controller {
      */
     public function destroy(Category $category) {
         Category::destroy($category->id);
+        return response()->json($category);
     }
 }
